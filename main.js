@@ -19,22 +19,19 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
        <td>${address}</td>
        <td>${phone}</td>
        <td>${actions}</td>
-       <td class="list__body--actions">
-       <i class="fa fa-edit"></i>
-         <i class="fa fa-trash"></i>
        </td>
        </tr>`
         });
 
-        rowEmployee.innerHTML = ` <tr>
+        rowEmployee.innerHTML = ` <thead><tr>
         <th>Name</th>
         <th>Email</th>
         <th>Address</th>
         <th>Phone</th>
         <th>Actions</th>
-        </tr> ` + acc;
+        </tr></thead>` + acc;
 
-    }) 
+    })
 
     const newEmployee = {
         fullname: 'Estefania Avalos',
@@ -45,13 +42,13 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
       };
 
  
-      fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/remove/${3}`, {
+      /*fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/remove/${3}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
     })
         .then(data => data.json())
         .then(result => console.log(result));
-   /*
+   
       fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

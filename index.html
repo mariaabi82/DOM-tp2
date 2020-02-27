@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,20 +8,33 @@
     <link rel="stylesheet" href="style.css">
     <title>TP 2: DOM</title>
 </head>
+
 <body>
     <div class="list__main">
         <div class="list__body">
-          <table>
-                <thead>Manage Employees</thead>
-            <tbody id="employees">
-               
-            </tbody>
-          </table>
+            <table>
+                <div class="table-title">
+                  
+                    <h2>Manage Employees</h2>
+                    <button type="submit">
+                    <span>Add New Employee</span>
+                    </button>
+           
+                </div>
+                <div class="formularios">
+                    <form action="" method="get">
+                    <input type="text" placeholder="Filter...">
+                </form>
+            </div>
+                <tbody id="employees">
+                </tbody>
+            </table>
         </div>
-    </div> 
+    </div>
 
 
 
     <script src="main.js"></script>
 </body>
+
 </html>
