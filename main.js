@@ -18,8 +18,10 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
        <td>${email}</td>
        <td>${address}</td>
        <td>${phone}</td>
-       <td>${actions}</td>
-       </td>
+       <td>
+       <i class="fa fa-pencil" id="pencil-icon"></i>
+       <i class="fa fa-trash" id="trash-icon"></i>
+       </td>   
        </tr>`
         });
 
@@ -30,10 +32,71 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
         <th>Phone</th>
         <th>Actions</th>
         </tr></thead>` + acc;
+       
+    
 
+    const pencil = document.getElementById("pencil-icon")
+    const trash = document.getElementById("trash-icon")
+    const submitButton = document.getElementById("submit-button")
+    const modal = document.getElementById("modal")
+
+    submitButton.onclick = () => {
+    modal.classList.remove('nomostrar')
+    }
+
+    const cancel = document.getElementById("cancel")
+
+    cancel.onclick = () => {
+      modal.classList.add('nomostrar')
+    }
+
+    const add = document.getElementById("add")
+
+    add.onclick = () => {
+      const name = document.getElementById("new-name").value
+      const email = document.getElementById("new-email").value
+      const adress = document.getElementById("new-adress").value
+      const phone = document.getElementById("new-phone").value
+      const newEmployee = {
+        fullname: `${name}`,
+        email: `${email}`,
+        address: `${adress}`,
+        phone: `${phone}`,
+        
+      };
+      
+      fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(newEmployee),
+      })
+        .then(data => data.json())
+        .then(result => console.log(result));
+    }
+
+    /*pencil.onclick = () => {
+
+
+      fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/edit/${2}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(modifiedEmployee),
+        })
+            .then(data => data.json())
+            .then(result => console.log(result));
+
+    }*/
+
+    trash.onclick = () => {
+      fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/remove/${2}`, {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
     })
+        .then(data => data.json())
+        .then(result => console.log(result));
+    }
 
-    const newEmployee = {
+    /*const newEmployee = {
         fullname: 'Estefania Avalos',
         email: 'emlavalos92@gmail.com',
         address: 'Cochabamba 546',
@@ -42,7 +105,7 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
       };
 
  
-      /*fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/remove/${3}`, {
+      fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/remove/${3}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
     })
@@ -55,7 +118,7 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
         body: JSON.stringify(newEmployee),
       })
         .then(data => data.json())
-        .then(result => console.log(result)); 
+        .then(result => console.log(result));
 
         const modifiedEmployee = {
             fullname: 'Tefi Avalos',
@@ -72,3 +135,4 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
             .then(result => console.log(result));
 
     */
+  })

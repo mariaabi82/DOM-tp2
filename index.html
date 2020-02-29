@@ -7,6 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <title>TP 2: DOM</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 </head>
 
 <body>
@@ -14,9 +16,8 @@
         <div class="list__body">
             <table>
                 <div class="table-title">
-                  
                     <h2>Manage Employees</h2>
-                    <button type="submit">
+                    <button type="submit" id="submit-button">
                     <span>Add New Employee</span>
                     </button>
            
@@ -32,7 +33,26 @@
         </div>
     </div>
 
-
+    <div id="modal" class="nomostrar">
+        <div class="modal-form-title">
+            <h2>Add Employee</h2>
+        </div>
+        <form action="" method="get" class="modal-form">
+            <label>Name</label>
+            <input type="text" id="new-name">
+            <label>Email</label>
+            <input type="text" id="new-email">
+            <label>Adress</label>
+            <textarea name="Adress" rows="3" cols="30" id="new-adress">
+            </textarea> 
+            <label>Phone</label>
+            <input type="text" id="new-phone">
+            </form>
+            <div class="div-button">
+            <button id="cancel">Cancel</button>
+            <button id="add">Add</button></div>
+        </form>
+    </div>
 
     <script src="main.js"></script>
 </body>

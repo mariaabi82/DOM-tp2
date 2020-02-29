@@ -75,3 +75,24 @@ body {
   text-align: center;
   border-radius: 2px;
 }
+  #modal{
+  background-color: #fff;
+  position: absolute;
+  border: solid 1px #808080;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 5px;
+  }
+
+  .modal-form{
+    display:flex;
+    flex-direction: column;
+  }
+
+  .nomostrar{
+    display:none;
+  }
+
+  .fa{
+    padding: 5px;
+  }
