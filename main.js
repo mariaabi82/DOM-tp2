@@ -19,8 +19,8 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
        <td>${address}</td>
        <td>${phone}</td>
        <td>
-       <i class="fa fa-pencil" id="pencil-icon"></i>
-       <i class="fa fa-trash" id="trash-icon"></i>
+       <i class="fa fa-pencil pencil-icon"></i>
+       <i class="fa fa-trash trash-icon" id="${employee.id}"></i>
        </td>   
        </tr>`
         });
@@ -35,8 +35,8 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
        
     
 
-    const pencil = document.getElementById("pencil-icon")
-    const trash = document.getElementById("trash-icon")
+    const pencil = document.getElementsByClassName("pencil-icon")
+    const trash = document.getElementsByClassName("trash-icon")
     const submitButton = document.getElementById("submit-button")
     const modal = document.getElementById("modal")
 
@@ -87,14 +87,20 @@ fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
 
     }*/
 
-    trash.onclick = () => {
-      fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/remove/${2}`, {
+    for (let i = 0; i < trash.length; i++) {
+      trash[i].onclick = () => {
+        const remove = trash[i].id
+        fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/${remove}`, {
         method: 'DELETE',
         headers: { 'Content-Type': 'application/json' },
     })
         .then(data => data.json())
         .then(result => console.log(result));
     }
+      }
+      
+    
+      
 
     /*const newEmployee = {
         fullname: 'Estefania Avalos',
