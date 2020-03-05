@@ -43,13 +43,11 @@ const mostrarUsuarios = () => {
       const submitButton = document.getElementById("submit-button")
       const modal = document.getElementById("modal")
 
-      submitButton.onclick = () => {
-
-        const mostrarModal = () => {
-          modal.innerHTML = `<div class="modal-form-title">
+      const mostrarModal = () => {
+        modal.innerHTML = `<div class="modal-form-title">
         <h2>Add Employee</h2>
-    </div>
-    <form action="" method="get" class="modal-form">
+        </div>
+        <form action="" method="get" class="modal-form">
         <label>Name</label>
         <input type="text" id="new-name">
         <label>Email</label>
@@ -63,7 +61,12 @@ const mostrarUsuarios = () => {
         <div class="div-button">
         <button id="cancel">Cancel</button>
         <button id="add">Add</button></div>
-    </form>`
+        </form>`
+      }
+
+      submitButton.onclick = () => {
+
+        mostrarModal()        
           modal.classList.remove('nomostrar')
 
           const cancel = document.getElementById("cancel")
@@ -101,8 +104,7 @@ const mostrarUsuarios = () => {
 
                   })
               })
-
-          }
+          
 
         }
 
@@ -110,13 +112,15 @@ const mostrarUsuarios = () => {
 
       }
 
-
+      // if accion == edit/add/delete
+      //user[i].fullname, ...
       for (let i = 0; i < pencil.length; i++) {
         pencil[i].onclick = () => {
           console.log(pencil[i])
           const edit = pencil[i].id
           console.log('cualquier cosa')
           mostrarModal()
+          //enviar el array del usuario seleccionado
 
           //   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/${edit}`, {
           //     method: 'PUT',
