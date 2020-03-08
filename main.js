@@ -36,15 +36,15 @@ const mostrarUsuarios = () => {
         <th>Actions</th>
         </tr></thead>` + acc;
 
+    })
+}
+const pencil = document.getElementsByClassName("pencil-icon")
+const trash = document.getElementsByClassName("trash-icon")
+const submitButton = document.getElementById("submit-button")
+const modal = document.getElementById("modal")
 
-
-      const pencil = document.getElementsByClassName("pencil-icon")
-      const trash = document.getElementsByClassName("trash-icon")
-      const submitButton = document.getElementById("submit-button")
-      const modal = document.getElementById("modal")
-
-      const mostrarModal = () => {
-        modal.innerHTML = `<div class="modal-form-title">
+const mostrarModal = () => {
+  modal.innerHTML = `<div class="modal-form-title">
         <h2>Add Employee</h2>
         </div>
         <form action="" method="get" class="modal-form">
@@ -62,96 +62,84 @@ const mostrarUsuarios = () => {
         <button id="cancel">Cancel</button>
         <button id="add">Add</button></div>
         </form>`
-      }
+}
 
-      submitButton.onclick = () => {
+submitButton.onclick = () => {
+  modal.classList.remove('nomostrar')
+  mostrarModal()
 
-        mostrarModal()        
-          modal.classList.remove('nomostrar')
+  const cancel = document.getElementById("cancel")
 
-          const cancel = document.getElementById("cancel")
+  cancel.onclick = () => {
+    modal.classList.add('nomostrar')
+  }
 
-          cancel.onclick = () => {
-            modal.classList.add('nomostrar')
-          }
+  const add = document.getElementById("add")
 
-          const add = document.getElementById("add")
+  add.onclick = () => {
+    const name = document.getElementById("new-name").value
+    const email = document.getElementById("new-email").value
+    const address = document.getElementById("new-adress").value
+    const phone = document.getElementById("new-phone").value
+    const newEmployee = {
+      fullname: name,
+      email: email,
+      address: address,
+      phone: phone,
+    };
 
-          add.onclick = () => {
-            const name = document.getElementById("new-name").value
-            const email = document.getElementById("new-email").value
-            const address = document.getElementById("new-adress").value
-            const phone = document.getElementById("new-phone").value
-            const newEmployee = {
-              fullname: `${name}`,
-              email: `${email}`,
-              address: `${address}`,
-              phone: `${phone}`,
-            };
-
-            modal.classList.add('nomostrar')
-            fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(newEmployee),
-            })
-              .then(data => data.json())
-              .then(result => {
-                fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
-                  .then(info => info.json())
-                  .then(resultado => {
-                    mostrarUsuarios()
-
-                  })
-              })
-          
-
-        }
-
-        mostrarModal()
-
-      }
-
-      // if accion == edit/add/delete
-      //user[i].fullname, ...
-      for (let i = 0; i < pencil.length; i++) {
-        pencil[i].onclick = () => {
-          console.log(pencil[i])
-          const edit = pencil[i].id
-          console.log('cualquier cosa')
-          mostrarModal()
-          //enviar el array del usuario seleccionado
-
-          //   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/${edit}`, {
-          //     method: 'PUT',
-          //     headers: { 'Content-Type': 'application/json' },
-          //   })
-          //     .then(data => data.json())
-          //     .then(result => console.log(result));
-          // }
-        }
-      }
-
-
-      for (let i = 0; i < trash.length; i++) {
-        trash[i].onclick = () => {
-          const remove = trash[i].id
-          fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/${remove}`, {
-            method: 'DELETE',
-            headers: { 'Content-Type': 'application/json' },
-          })
-            .then(dataDelete => dataDelete.json())
-            .then(resultDelete => {
-              fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
-                .then(infoDelete => infoDelete.json())
-                .then(resultadoDelete => {
-                  mostrarUsuarios()
-
-                })
-            })
-        }
-      }
+    
+    fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newEmployee),
     })
+      .then(data => data.json())
+      .then(result => {
+        modal.classList.add('nomostrar')
+        mostrarUsuarios();
+      })
+  }
+}
+
+// if accion == edit/add/delete
+//user[i].fullname, ...
+for (let i = 0; i < pencil.length; i++) {
+  pencil[i].onclick = () => {
+    console.log(pencil[i])
+    const edit = pencil[i].id
+    console.log('cualquier cosa')
+    mostrarModal()
+    //enviar el array del usuario seleccionado
+
+    //   fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/${edit}`, {
+    //     method: 'PUT',
+    //     headers: { 'Content-Type': 'application/json' },
+    //   })
+    //     .then(data => data.json())
+    //     .then(result => console.log(result));
+    // }
+  }
+}
+
+
+for (let i = 0; i < trash.length; i++) {
+  trash[i].onclick = () => {
+    const remove = trash[i].id
+    fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users/${remove}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    })
+      .then(dataDelete => dataDelete.json())
+      .then(resultDelete => {
+        fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
+          .then(infoDelete => infoDelete.json())
+          .then(resultadoDelete => {
+            mostrarUsuarios()
+
+          })
+      })
+  }
 }
 
 mostrarUsuarios()
