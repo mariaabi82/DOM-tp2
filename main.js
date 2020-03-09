@@ -2,42 +2,46 @@ const submitButton = document.getElementById("submit-button")
 const modal = document.getElementById("modal")
 
 
+const mostrarUsuariosEnPantalla = (result) =>{
+  let acc = "";
+  const rowEmployee = document.getElementById("employees")
+result.forEach(employee => {
+  let name = employee.fullname
+  let email = employee.email
+  let address = employee.address
+  let phone = employee.phone
+  let actions = employee.actions
+
+  acc += `<tr>
+ <td>${name}</td>
+ <td>${email}</td>
+ <td>${address}</td>
+ <td>${phone}</td>
+ <td>
+ <i class="fa fa-pencil pencil-icon" id="edit-${employee.id}"></i>
+ <i class="fa fa-trash trash-icon" id="${employee.id}"></i>
+ </td>   
+ </tr>`
+rowEmployee.innerHTML = ` <thead><tr>
+  <th>Name</th>
+  <th>Email</th>
+  <th>Address</th>
+  <th>Phone</th>
+  <th>Actions</th>
+  </tr></thead>` + acc;
+})}
+
+
 const mostrarUsuarios = () => {
 
   fetch('https://tp-js-2-api-wjfqxquokl.now.sh/users')
     .then(data => data.json())
     .then(result => {
-      const rowEmployee = document.getElementById("employees")
+      mostrarUsuariosEnPantalla(result)
+      
+      
 
-      let acc = "";
-
-      result.forEach(employee => {
-        let name = employee.fullname
-        let email = employee.email
-        let address = employee.address
-        let phone = employee.phone
-        let actions = employee.actions
-
-        acc += `<tr>
-       <td>${name}</td>
-       <td>${email}</td>
-       <td>${address}</td>
-       <td>${phone}</td>
-       <td>
-       <i class="fa fa-pencil pencil-icon" id="edit-${employee.id}"></i>
-       <i class="fa fa-trash trash-icon" id="${employee.id}"></i>
-       </td>   
-       </tr>`
-      });
-
-      rowEmployee.innerHTML = ` <thead><tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Address</th>
-        <th>Phone</th>
-        <th>Actions</th>
-        </tr></thead>` + acc;
-
+      
       const pencil = document.getElementsByClassName("pencil-icon")
       const trash = document.getElementsByClassName("trash-icon")
 
@@ -45,7 +49,6 @@ const mostrarUsuarios = () => {
       for (let i = 0; i < pencil.length; i++) {
         pencil[i].onclick = () => {
           const edit = pencil[i].id
-          console.log(edit)
           result.forEach(element => {
             if (element.id == edit.split('-')[1]) {
               modal.classList.remove('nomostrar')
@@ -171,3 +174,15 @@ submitButton.onclick = () => {
 
 
 mostrarUsuarios()
+
+const usuarioFiltrado = document.getElementById("filter")
+
+usuarioFiltrado.onkeypress = e => {
+  if (e.keyCode == 13) {
+      fetch(`https://tp-js-2-api-wjfqxquokl.now.sh/users?search=${usuarioFiltrado.value}`)
+          .then(data => data.json())
+          .then(users => {
+              mostrarUsuariosEnPantalla(users);
+          })
+  }
+}
