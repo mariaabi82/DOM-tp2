@@ -1,3 +1,14 @@
+// Excelente trabajo, chicas!
+// Tengo poco para comentar porque todo funciona muy bien y el codigo es claro y prolijo. 
+
+// Habria sido preferible que se ciñeran mas a los requerimientos de diseño, ya que 
+// la pagina no se ve muy bien, especialmente el formulario para agregar / editar usuarios. 
+
+// Deje algunas observaciones a lo largo del codigo, pero son detalles. En general todo esta muy bien. 
+
+// Una ultima cosa: traten de tabular mejor el codigo! 
+// Si no se acostumbran ustedes, un clic derecho en VSCode y "format document" hace maravillas :) 
+
 const submitButton = document.getElementById("submit-button")
 const modal = document.getElementById("modal")
 
@@ -5,11 +16,15 @@ const modal = document.getElementById("modal")
 const mostrarUsuariosEnPantalla = (result) =>{
   let acc = "";
   const rowEmployee = document.getElementById("employees")
+  console.log(result)
 result.forEach(employee => {
   let name = employee.fullname
   let email = employee.email
   let address = employee.address
   let phone = employee.phone
+
+  // no existe la propiedad actions, ni estan usando esta variable. 
+  // habria que borrarla
   let actions = employee.actions
 
   acc += `<tr>
@@ -99,7 +114,12 @@ const mostrarUsuarios = () => {
                 .then(infoDelete => infoDelete.json())
                 .then(resultadoDelete => {
                   mostrarUsuarios()
-
+                    // fijense que resultadoDelete ya nos trae la lista actualizada de usuarios, 
+                    // asi que no es necesario llamar a la funcion mostrarUsuarios
+                    // podemos llamar directamente a mostrarUsuariosEnPantalla pasandole resultadoDelete
+                    // asi:
+                    // mostrarUsuariosEnPantalla(resultadoDelete)
+                    // es una boludez, pero nos ahorra un fetch: tiempo muy importante para nuestro usuario!!
                 })
             })
         }
@@ -130,6 +150,8 @@ const mostrarModal = (name = "", email = "", address = "", tel = "") => {
         ${name ? '<button id="edit">Save</button></div>' :
       '<button id="add">Add</button></div>'}
         </form>`
+
+        // excelente ese operador ternario!!
 
   const cancel = document.getElementById("cancel")
 
